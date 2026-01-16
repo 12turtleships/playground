@@ -244,7 +244,12 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
-            transition: background 0.3s ease;
+            transition: background 0.3s ease, opacity 0.3s ease, max-height 0.3s ease;
+            overflow: hidden;
+        }
+
+        .input-section.hidden {
+            display: none;
         }
 
         .input-group {
@@ -346,7 +351,7 @@
             </select>
         </div>
 
-        <div class="input-section">
+        <div class="input-section hidden" id="inputSection">
             <div class="input-group">
                 <label class="input-label">Regular Numbers:</label>
                 <div class="range-input">
@@ -374,7 +379,7 @@
         </button>
 
         <div class="info">
-            <strong>How it works:</strong> Select a lotto type or choose "Custom" to set your own ranges. The generator creates 5 sets of numbers, each sorted in ascending order. You can still adjust the ranges manually for any lotto type.
+            <strong>How it works:</strong> Select Powerball or Mega Millions for preset configurations, or choose "Custom" to set your own ranges. The generator creates 5 sets of numbers, each sorted in ascending order.
         </div>
     </div>
 
@@ -435,7 +440,16 @@
         function changeLottoType() {
             const lottoType = document.getElementById('lottoType').value;
             const config = lottoConfigs[lottoType];
+            const inputSection = document.getElementById('inputSection');
             
+            // Show/hide input section based on lotto type
+            if (lottoType === 'custom') {
+                inputSection.classList.remove('hidden');
+            } else {
+                inputSection.classList.add('hidden');
+            }
+            
+            // Always update the values (even if hidden) for consistency
             document.getElementById('regularMin').value = config.regularMin;
             document.getElementById('regularMax').value = config.regularMax;
             document.getElementById('bonusMin').value = config.bonusMin;
