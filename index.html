@@ -203,28 +203,6 @@
             }
         }
 
-        .generate-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            padding: 18px 50px;
-            font-size: 1.2em;
-            font-weight: 600;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            margin-top: 20px;
-        }
-
-        .generate-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
-        }
-
-        .generate-btn:active {
-            transform: translateY(0);
-        }
 
         .empty-state {
             color: var(--text-secondary);
@@ -300,6 +278,11 @@
 
         .lotto-type-selector {
             margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
         }
 
         .lotto-type-selector select {
@@ -322,6 +305,28 @@
         .lotto-type-selector select:focus {
             outline: none;
             border-color: var(--bg-gradient-start);
+        }
+
+        .generate-btn-inline {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1em;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .generate-btn-inline:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .generate-btn-inline:active {
+            transform: translateY(0);
         }
 
         .info {
@@ -349,6 +354,9 @@
                 <option value="powerball" selected>Powerball</option>
                 <option value="megamillions">Mega Millions</option>
             </select>
+            <button class="generate-btn-inline" onclick="generateLottoNumbers()">
+                Generate Numbers
+            </button>
         </div>
 
         <div class="input-section hidden" id="inputSection">
@@ -373,10 +381,6 @@
         <div id="lottoContainer">
             <div class="empty-state">Your numbers will appear here</div>
         </div>
-
-        <button class="generate-btn" onclick="generateLottoNumbers()">
-            Generate Numbers
-        </button>
 
         <div class="info">
             <strong>How it works:</strong> Select Powerball or Mega Millions for preset configurations, or choose "Custom" to set your own ranges. The generator creates 5 sets of numbers, each sorted in ascending order.
@@ -441,6 +445,11 @@
             const lottoType = document.getElementById('lottoType').value;
             const config = lottoConfigs[lottoType];
             const inputSection = document.getElementById('inputSection');
+            
+            // Clear the displayed numbers and show empty state
+            const container = document.getElementById('lottoContainer');
+            container.innerHTML = '<div class="empty-state">Your numbers will appear here</div>';
+            container.className = '';
             
             // Show/hide input section based on lotto type
             if (lottoType === 'custom') {
