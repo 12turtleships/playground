@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lotto Number Generator</title>
+    <!-- Google AdSense -->
+    <meta name="google-adsense-account" content="ca-pub-2497920379756999">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2497920379756999"
+         crossorigin="anonymous"></script>
     <style>
         :root {
             --bg-gradient-start: #667eea;
@@ -342,6 +346,19 @@
             font-size: 0.9em;
             transition: background 0.3s ease, color 0.3s ease;
         }
+
+        .ad-container {
+            margin: 24px 0;
+            min-height: 90px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .ad-container ins {
+            display: block;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -361,6 +378,19 @@
             <button class="generate-btn-inline" onclick="generateLottoNumbers()">
                 Generate Numbers
             </button>
+        </div>
+
+        <!-- Google AdSense: create an ad unit at google.com/adsense to get your data-ad-slot value -->
+        <div class="ad-container">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-2497920379756999"
+                 data-ad-slot="1234567890"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
         </div>
 
         <div class="input-section hidden" id="inputSection">
