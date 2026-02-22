@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lotto Number Generator</title>
+    <title>Free Lotto Number Generator | Powerball &amp; Mega Millions Picks</title>
+    <meta name="description" content="Generate random Powerball and Mega Millions numbers for fun. Free tool with official number ranges. For entertainment only—play responsibly.">
+    <meta name="robots" content="index, follow">
     <!-- Google AdSense -->
     <meta name="google-adsense-account" content="ca-pub-2497920379756999">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2497920379756999"
@@ -359,6 +361,114 @@
             display: block;
             text-align: center;
         }
+
+        .ad-label {
+            font-size: 0.75em;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+        }
+
+        .site-header {
+            text-align: center;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--input-border);
+        }
+
+        .site-title {
+            font-size: 1.25em;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .site-nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .site-nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95em;
+            transition: color 0.2s ease;
+        }
+
+        .site-nav a:hover {
+            color: var(--bg-gradient-start);
+        }
+
+        main.content {
+            text-align: left;
+        }
+
+        main.content .center-block {
+            text-align: center;
+        }
+
+        .about-section, .policy-section {
+            margin-top: 32px;
+            padding: 24px;
+            background: var(--info-bg);
+            border-radius: 12px;
+            color: var(--text-secondary);
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+
+        .about-section h2, .policy-section h2 {
+            color: var(--text-primary);
+            font-size: 1.25em;
+            margin-bottom: 12px;
+        }
+
+        .about-section p, .policy-section p {
+            margin-bottom: 12px;
+        }
+
+        .about-section p:last-child, .policy-section p:last-child {
+            margin-bottom: 0;
+        }
+
+        .disclaimer {
+            font-size: 0.9em;
+            color: var(--text-secondary);
+            margin-top: 16px;
+            padding: 12px;
+            border-left: 4px solid var(--bg-gradient-start);
+            background: var(--input-bg);
+            border-radius: 0 8px 8px 0;
+        }
+
+        .site-footer {
+            margin-top: 40px;
+            padding-top: 24px;
+            border-top: 1px solid var(--input-border);
+            text-align: center;
+            font-size: 0.85em;
+            color: var(--text-secondary);
+        }
+
+        .site-footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+
+        .site-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .site-footer .links {
+            margin-bottom: 8px;
+        }
+
+        .site-footer .links a {
+            margin: 0 10px;
+        }
     </style>
 </head>
 <body>
@@ -366,8 +476,21 @@
         <div class="theme-toggle" onclick="toggleTheme()" title="Toggle dark/light mode">
             <div class="theme-toggle-slider">🌙</div>
         </div>
-        <h1>🎰 Lotto Number Generator</h1>
-        <p class="subtitle">Choose a lotto type and generate your lucky numbers!</p>
+
+        <header class="site-header">
+            <div class="site-title">Lotto Number Generator</div>
+            <nav class="site-nav" aria-label="Main navigation">
+                <a href="#generator">Home</a>
+                <a href="#about">About</a>
+                <a href="#privacy">Privacy Policy</a>
+                <a href="#terms">Terms of Use</a>
+            </nav>
+        </header>
+
+        <main class="content">
+        <section id="generator" class="center-block">
+        <h1>🎰 Free Lotto Number Generator</h1>
+        <p class="subtitle">Choose Powerball, Mega Millions, or custom ranges and generate random numbers for entertainment.</p>
         
         <div class="lotto-type-selector">
             <select id="lottoType" onchange="changeLottoType()">
@@ -381,7 +504,8 @@
         </div>
 
         <!-- Google AdSense: create an ad unit at google.com/adsense to get your data-ad-slot value -->
-        <div class="ad-container">
+        <div class="ad-container" aria-label="Advertisement">
+            <div class="ad-label">Advertisement</div>
             <ins class="adsbygoogle"
                  style="display:block"
                  data-ad-client="ca-pub-2497920379756999"
@@ -419,6 +543,38 @@
         <div class="info">
             <strong>How it works:</strong> Select Powerball or Mega Millions for preset configurations, or choose "Custom" to set your own ranges. The generator creates 5 sets of numbers, each sorted in ascending order.
         </div>
+        </section>
+
+        <section id="about" class="about-section">
+            <h2>About This Tool</h2>
+            <p>This free lotto number generator helps you create random number combinations for Powerball, Mega Millions, or your own custom lottery-style game. It uses official number ranges: Powerball uses 5 numbers from 1–69 plus the Powerball (1–26); Mega Millions uses 5 numbers from 1–70 plus the Mega Ball (1–25).</p>
+            <p>We built this tool for entertainment and to help players quickly generate multiple sets of numbers. Each set is randomly generated and sorted for easy reading. No strategy or prediction is involved—every combination has an equal random chance.</p>
+            <p>This site is not affiliated with, endorsed by, or connected to any official lottery. Lottery play is subject to local laws and age restrictions. Please play responsibly and only spend what you can afford. This tool does not guarantee any outcome.</p>
+            <div class="disclaimer">
+                <strong>Disclaimer:</strong> For entertainment only. Not gambling advice. Check your local laws. Must be of legal age to play lottery in your jurisdiction.
+            </div>
+        </section>
+
+        <section id="privacy" class="policy-section">
+            <h2>Privacy Policy</h2>
+            <p>We respect your privacy. This site may use cookies and similar technologies for analytics and to show relevant ads (e.g., Google AdSense). We do not sell your personal data. Third-party advertisers may collect data as described in their own privacy policies. By using this site, you agree to this policy. For questions, contact us through the channels listed on this site.</p>
+        </section>
+
+        <section id="terms" class="policy-section">
+            <h2>Terms of Use</h2>
+            <p>You may use this free lotto number generator for personal, non-commercial entertainment. Do not use it for any illegal purpose or in any way that violates lottery rules in your area. We provide the tool "as is" without warranties. We are not liable for any loss or damage arising from your use of the generated numbers or this website. By using this site, you agree to these terms.</p>
+        </section>
+
+        <footer class="site-footer">
+            <div class="links">
+                <a href="#generator">Home</a>
+                <a href="#about">About</a>
+                <a href="#privacy">Privacy Policy</a>
+                <a href="#terms">Terms of Use</a>
+            </div>
+            <p>&copy; Lotto Number Generator. For entertainment only. Play responsibly.</p>
+        </footer>
+        </main>
     </div>
 
     <script>
