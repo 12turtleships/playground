@@ -119,6 +119,15 @@
             <div class="empty-state">Your numbers will appear here</div>
         </div>
 
+        <div class="action-buttons hidden" id="actionButtons">
+            <button class="action-btn" onclick="copyNumbers()" id="copyBtn" aria-label="Copy numbers to clipboard">
+                <span class="action-icon">📋</span> Copy Numbers
+            </button>
+            <button class="action-btn" onclick="saveAsImage()" aria-label="Save numbers as image">
+                <span class="action-icon">📷</span> Save as Image
+            </button>
+        </div>
+
         <div style="margin-top:30px; text-align:center;">
             <a href="index.html" class="generate-btn-inline" style="text-decoration:none; display:inline-block;">&larr; Back to Generator</a>
         </div>
@@ -216,6 +225,8 @@
         }
 
         function displayAllSets(allSets, bonusName, matches) {
+            lastGeneratedSets = allSets;
+            lastBonusName = bonusName;
             const container = document.getElementById('lottoContainer');
             container.innerHTML = '';
             container.className = 'lotto-sets';
@@ -253,6 +264,7 @@
                 }
                 container.appendChild(setDiv);
             });
+            document.getElementById('actionButtons').classList.remove('hidden');
         }
 
         function buildMatchInfo(match, bonusName) {
@@ -290,6 +302,68 @@
             numsDiv.appendChild(bonusEl);
             div.appendChild(numsDiv);
             return div;
+        }
+
+        var lastGeneratedSets = [];
+        var lastBonusName = '';
+
+        function copyNumbers() {
+            if (!lastGeneratedSets.length) return;
+            var lottoType = document.getElementById('lottoType').value;
+            var lines = lastGeneratedSets.map(function(set, i) {
+                return 'Set ' + (i + 1) + ': ' + set.regular.join(', ') + ' + ' + lastBonusName + ': ' + set.powerball;
+            });
+            var text = lottoType.charAt(0).toUpperCase() + lottoType.slice(1) + ' Numbers (Simulated)\n' +
+                lines.join('\n') + '\n\nGenerated at lotto-number-generator.com';
+            navigator.clipboard.writeText(text).then(function() {
+                var btn = document.getElementById('copyBtn');
+                var orig = btn.innerHTML;
+                btn.innerHTML = '<span class="action-icon">\u2705</span> Copied!';
+                setTimeout(function() { btn.innerHTML = orig; }, 2000);
+            });
+        }
+
+        function saveAsImage() {
+            if (!lastGeneratedSets.length) return;
+            var canvas = document.createElement('canvas');
+            var W = 800, rowH = 70, padTop = 80, padBot = 60;
+            var H = padTop + lastGeneratedSets.length * rowH + padBot;
+            canvas.width = W; canvas.height = H;
+            var ctx = canvas.getContext('2d');
+            var grad = ctx.createLinearGradient(0, 0, W, H);
+            grad.addColorStop(0, '#667eea'); grad.addColorStop(1, '#764ba2');
+            ctx.fillStyle = grad; ctx.fillRect(0, 0, W, H);
+            ctx.fillStyle = 'rgba(255,255,255,0.95)';
+            roundRect(ctx, 20, 20, W - 40, H - 40, 16); ctx.fill();
+            var lottoType = document.getElementById('lottoType').value;
+            var title = lottoType === 'megamillions' ? 'Mega Millions' : 'Powerball';
+            ctx.fillStyle = '#333'; ctx.font = 'bold 28px sans-serif'; ctx.textAlign = 'center';
+            ctx.fillText(title + ' Numbers (Simulated)', W / 2, 58);
+            ctx.font = '20px sans-serif'; ctx.textAlign = 'left';
+            lastGeneratedSets.forEach(function(set, i) {
+                var y = padTop + i * rowH + 35;
+                ctx.fillStyle = '#888'; ctx.fillText('Set ' + (i + 1) + ':', 50, y);
+                ctx.fillStyle = '#333'; ctx.font = 'bold 20px sans-serif';
+                var nums = set.regular.join('  ');
+                ctx.fillText(nums, 130, y);
+                ctx.fillStyle = '#f5576c';
+                ctx.fillText('+  ' + set.powerball, 130 + ctx.measureText(nums + '  ').width, y);
+                ctx.font = '20px sans-serif';
+            });
+            ctx.fillStyle = '#667eea'; ctx.font = '14px sans-serif'; ctx.textAlign = 'center';
+            ctx.fillText('lotto-number-generator.com', W / 2, H - 32);
+            canvas.toBlob(function(blob) {
+                var a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+                a.download = 'lotto-numbers-simulated.png'; a.click(); URL.revokeObjectURL(a.href);
+            });
+        }
+
+        function roundRect(ctx, x, y, w, h, r) {
+            ctx.beginPath(); ctx.moveTo(x + r, y); ctx.lineTo(x + w - r, y);
+            ctx.quadraticCurveTo(x + w, y, x + w, y + r); ctx.lineTo(x + w, y + h - r);
+            ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h); ctx.lineTo(x + r, y + h);
+            ctx.quadraticCurveTo(x, y + h, x, y + h - r); ctx.lineTo(x, y + r);
+            ctx.quadraticCurveTo(x, y, x + r, y); ctx.closePath();
         }
     </script>
 </body>

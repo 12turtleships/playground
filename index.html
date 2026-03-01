@@ -83,6 +83,89 @@
       ]
     }
     </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "How to Generate Random Lottery Numbers for Powerball and Mega Millions",
+      "description": "Use this free online tool to instantly generate random Powerball or Mega Millions numbers, checked against real past jackpot draws.",
+      "totalTime": "PT30S",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Choose your lottery game",
+          "text": "Select Powerball, Mega Millions, or Custom from the dropdown menu to set the correct number ranges."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Generate your numbers",
+          "text": "Click the Generate Numbers button to create 5 random sets of lottery numbers, each sorted in ascending order."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Check for jackpot matches",
+          "text": "Each set is automatically compared against thousands of real past jackpot draws. If your numbers match a previous winner, the draw date and details appear below your set."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "Copy or save your numbers",
+          "text": "Use the Copy or Save as Image button to keep your generated numbers for easy reference."
+        }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How does a random number generator work for the lottery?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our generator uses JavaScript's Math.random() to produce pseudo-random numbers within the official range for each game. For Powerball, it picks 5 unique numbers from 1–69 plus a Powerball from 1–26. For Mega Millions, it picks 5 from 1–70 plus a Mega Ball from 1–25. Every combination has an equal chance of being selected."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are the odds of winning the Powerball jackpot?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The odds of matching all 5 numbers plus the Powerball are approximately 1 in 292.2 million. For Mega Millions, the odds are about 1 in 302.6 million. These odds are the same regardless of which numbers you choose."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the most common Powerball number?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "While certain numbers appear more frequently in historical draws, every number has an equal probability of being drawn in any given game. Past frequency does not predict future results. Our tool generates numbers randomly, giving every combination an equal chance."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use this generator to pick my lottery numbers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, you can use the generated numbers to fill out a Powerball or Mega Millions ticket. The tool uses official number ranges and generates random combinations. However, this tool is for entertainment only and does not increase your chances of winning."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between Powerball and Mega Millions?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Powerball draws 5 numbers from 1–69 plus a Powerball from 1–26. Mega Millions draws 5 numbers from 1–70 plus a Mega Ball from 1–25. Both have drawings multiple times per week with jackpots starting at $20 million."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 <body>
     <div class="container">
@@ -106,14 +189,14 @@
         </nav>
         <section id="generator" class="center-block">
         <h1>Free Lotto Number Generator</h1>
-        <p class="subtitle">Generate random <strong>Powerball</strong>, <strong>Mega Millions</strong>, or custom lottery numbers — checked against thousands of real past jackpot draws.</p>
+        <p class="subtitle">Pick your lucky numbers for tonight’s Powerball or Mega Millions drawing — every set is instantly checked against 4,000+ real past jackpot winners.</p>
 
         <div class="db-status-warning" id="dbStatus" style="display:none">
             Historical jackpot database could not be loaded. Match checking and Simulate Match are unavailable. Make sure <code>lotto-db.js</code> is served alongside this page.
         </div>
 
         <div class="feature-banner" id="featureBanner">
-            <div class="feature-banner-title">Did your numbers ever win a jackpot?</div>
+            <div class="feature-banner-title">Have your numbers ever won a past jackpot?</div>
             <p>Every time you generate numbers, we check all 5 sets against thousands of real past Powerball and Mega Millions jackpot draws. If your numbers match a previous winning combination, the draw date and winning numbers appear right below your set with matches highlighted.</p>
             <p>The odds of an exact match are astronomically low — but want to see what it looks like when it happens? <a href="simulate.html"><strong>Try the Jackpot Match Simulator</strong></a> to see a guaranteed match using real past winning numbers.</p>
         </div>
@@ -165,10 +248,48 @@
             <div class="empty-state">Your numbers will appear here</div>
         </div>
 
-        <div class="info" role="complementary">
-            <h2 style="font-size:1em; margin-bottom:6px;">How It Works</h2>
-            <p>Select Powerball or Mega Millions for preset configurations, or choose “Custom” to set your own ranges. The generator creates 5 sets of numbers, each sorted in ascending order. For Powerball and Mega Millions, each set is compared against all past jackpot draws to find the closest historical match — matched numbers are highlighted.</p>
+        <div class="action-buttons hidden" id="actionButtons">
+            <button class="action-btn" onclick="copyNumbers()" id="copyBtn" aria-label="Copy numbers to clipboard">
+                <span class="action-icon">📋</span> Copy Numbers
+            </button>
+            <button class="action-btn" onclick="saveAsImage()" aria-label="Save numbers as image">
+                <span class="action-icon">📷</span> Save as Image
+            </button>
         </div>
+
+        <div class="info" role="complementary">
+            <h2 style="font-size:1em; margin-bottom:6px;">How to Generate Your Lucky Numbers for Tonight’s Drawing</h2>
+            <ol style="margin:8px 0 0 20px; line-height:1.8;">
+                <li><strong>Choose your game</strong> — select Powerball, Mega Millions, or Custom from the dropdown.</li>
+                <li><strong>Click Generate Numbers</strong> — the tool instantly creates 5 random sets, each sorted in ascending order.</li>
+                <li><strong>Check for jackpot matches</strong> — every set is compared against all past winning draws. If your numbers ever won a jackpot, you’ll see the draw date and matched numbers highlighted.</li>
+                <li><strong>Copy or save your picks</strong> — use the buttons below your results to copy the numbers or save them as an image.</li>
+            </ol>
+        </div>
+
+        <section class="faq-section" id="faq">
+            <h2>Frequently Asked Questions About Lottery Number Generators</h2>
+            <div class="faq-item">
+                <h3>How does a random number generator work for the lottery?</h3>
+                <p>Our generator uses JavaScript’s Math.random() to produce pseudo-random numbers within the official range for each game. For Powerball, it picks 5 unique numbers from 1–69 plus a Powerball from 1–26. For Mega Millions, it picks 5 from 1–70 plus a Mega Ball from 1–25. Every combination has an equal chance of being selected.</p>
+            </div>
+            <div class="faq-item">
+                <h3>What are the odds of winning the Powerball jackpot?</h3>
+                <p>The odds of matching all 5 numbers plus the Powerball are approximately 1 in 292.2 million. For Mega Millions, the odds are about 1 in 302.6 million. These odds are the same regardless of which numbers you choose — random picks have the same probability as “lucky” numbers.</p>
+            </div>
+            <div class="faq-item">
+                <h3>What is the most common Powerball number?</h3>
+                <p>While certain numbers appear more frequently in historical draws, every number has an equal probability of being drawn in any given game. Past frequency does not predict future results. Our tool generates numbers randomly, giving every combination an equal chance.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Can I use this generator to pick my lottery ticket numbers?</h3>
+                <p>Yes. The tool uses official Powerball and Mega Millions number ranges and generates truly random combinations. Many players use random generators instead of choosing their own numbers. However, no method increases your actual odds of winning.</p>
+            </div>
+            <div class="faq-item">
+                <h3>What is the difference between Powerball and Mega Millions?</h3>
+                <p>Powerball draws 5 white balls from 1–69 plus a red Powerball from 1–26. Mega Millions draws 5 white balls from 1–70 plus a gold Mega Ball from 1–25. Both games have drawings multiple times per week, with jackpots starting at $20 million and often growing into hundreds of millions.</p>
+            </div>
+        </section>
         </section>
         </main>
 
@@ -355,6 +476,8 @@
         }
 
         function displayAllSets(allSets, bonusName = 'Bonus', matches = []) {
+            lastGeneratedSets = allSets;
+            lastBonusName = bonusName;
             const container = document.getElementById('lottoContainer');
             container.innerHTML = '';
             container.className = 'lotto-sets';
@@ -401,6 +524,7 @@
 
                 container.appendChild(setDiv);
             });
+            document.getElementById('actionButtons').classList.remove('hidden');
         }
 
         function buildMatchInfo(match, bonusName) {
@@ -467,6 +591,95 @@
 
             div.appendChild(numsDiv);
             return div;
+        }
+
+
+        var lastGeneratedSets = [];
+        var lastBonusName = '';
+
+        function copyNumbers() {
+            if (!lastGeneratedSets.length) return;
+            const lottoType = document.getElementById('lottoType').value;
+            const lines = lastGeneratedSets.map(function(set, i) {
+                return 'Set ' + (i + 1) + ': ' + set.regular.join(', ') + ' + ' + lastBonusName + ': ' + set.powerball;
+            });
+            const text = lottoType.charAt(0).toUpperCase() + lottoType.slice(1) + ' Numbers\n' +
+                lines.join('\n') + '\n\nGenerated at lotto-number-generator.com';
+            navigator.clipboard.writeText(text).then(function() {
+                var btn = document.getElementById('copyBtn');
+                var orig = btn.innerHTML;
+                btn.innerHTML = '<span class="action-icon">\u2705</span> Copied!';
+                setTimeout(function() { btn.innerHTML = orig; }, 2000);
+            });
+        }
+
+        function saveAsImage() {
+            if (!lastGeneratedSets.length) return;
+            var canvas = document.createElement('canvas');
+            var W = 800, rowH = 70, padTop = 80, padBot = 60;
+            var H = padTop + lastGeneratedSets.length * rowH + padBot;
+            canvas.width = W;
+            canvas.height = H;
+            var ctx = canvas.getContext('2d');
+
+            var grad = ctx.createLinearGradient(0, 0, W, H);
+            grad.addColorStop(0, '#667eea');
+            grad.addColorStop(1, '#764ba2');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, W, H);
+
+            ctx.fillStyle = 'rgba(255,255,255,0.95)';
+            roundRect(ctx, 20, 20, W - 40, H - 40, 16);
+            ctx.fill();
+
+            var lottoType = document.getElementById('lottoType').value;
+            var title = lottoType === 'megamillions' ? 'Mega Millions' : lottoType === 'powerball' ? 'Powerball' : 'Custom';
+            ctx.fillStyle = '#333';
+            ctx.font = 'bold 28px -apple-system, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText(title + ' Numbers', W / 2, 58);
+
+            ctx.font = '20px -apple-system, sans-serif';
+            ctx.textAlign = 'left';
+            lastGeneratedSets.forEach(function(set, i) {
+                var y = padTop + i * rowH + 35;
+                ctx.fillStyle = '#888';
+                ctx.fillText('Set ' + (i + 1) + ':', 50, y);
+                ctx.fillStyle = '#333';
+                ctx.font = 'bold 20px -apple-system, sans-serif';
+                var nums = set.regular.join('  ');
+                ctx.fillText(nums, 130, y);
+                ctx.fillStyle = '#f5576c';
+                ctx.fillText('+  ' + set.powerball, 130 + ctx.measureText(nums + '  ').width, y);
+                ctx.font = '20px -apple-system, sans-serif';
+            });
+
+            ctx.fillStyle = '#667eea';
+            ctx.font = '14px -apple-system, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('lotto-number-generator.com', W / 2, H - 32);
+
+            canvas.toBlob(function(blob) {
+                var a = document.createElement('a');
+                a.href = URL.createObjectURL(blob);
+                a.download = 'lotto-numbers.png';
+                a.click();
+                URL.revokeObjectURL(a.href);
+            });
+        }
+
+        function roundRect(ctx, x, y, w, h, r) {
+            ctx.beginPath();
+            ctx.moveTo(x + r, y);
+            ctx.lineTo(x + w - r, y);
+            ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+            ctx.lineTo(x + w, y + h - r);
+            ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+            ctx.lineTo(x + r, y + h);
+            ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+            ctx.lineTo(x, y + r);
+            ctx.quadraticCurveTo(x, y, x + r, y);
+            ctx.closePath();
         }
 
         if (!window.LOTTO_DB) {
