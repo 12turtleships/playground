@@ -177,6 +177,10 @@
             </script>
         </div>
 
+        <div class="attempt-counter hidden" id="attemptCounter">
+            Attempt: <span id="attemptNum">0</span>
+        </div>
+
         <div class="input-section hidden" id="inputSection">
             <div class="input-group">
                 <label class="input-label">Regular Numbers:</label>
@@ -209,11 +213,6 @@
             </button>
         </div>
 
-        <div class="attempt-counter hidden" id="attemptCounter">
-            <span class="attempt-count">Attempt <strong id="attemptNum">0</strong></span>
-            <span class="attempt-sep">&middot;</span>
-            <span class="attempt-status" id="attemptStatus">No jackpot match yet</span>
-        </div>
 
         <div class="info" role="complementary">
             <strong>How it works:</strong> Choose Powerball, Mega Millions, or Custom → click Generate → get 5 random sets checked against all past jackpot draws. Copy or save your picks with the buttons below your results.
@@ -412,13 +411,11 @@
             displayAllSets(allSets, bonusName, matches);
 
             var hasJackpot = matches.some(function(m) { return m && m.regularMatches === 5 && m.bonusMatch; });
-            var statusEl = document.getElementById('attemptStatus');
+            var counterEl = document.getElementById('attemptCounter');
             if (hasJackpot) {
-                statusEl.textContent = 'Jackpot match found!';
-                statusEl.className = 'attempt-status attempt-hit';
+                counterEl.classList.add('attempt-hit');
             } else {
-                statusEl.textContent = 'No jackpot match yet';
-                statusEl.className = 'attempt-status';
+                counterEl.classList.remove('attempt-hit');
             }
         }
 
