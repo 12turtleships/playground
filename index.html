@@ -50,6 +50,12 @@
         <h1>Free Lotto Number Generator</h1>
         <p class="subtitle">Choose Powerball, Mega Millions, or custom ranges and generate random numbers for entertainment.</p>
 
+        <div class="feature-banner" id="featureBanner">
+            <div class="feature-banner-title">Did your numbers ever win a jackpot?</div>
+            <p>Every time you generate numbers, we check all 5 sets against thousands of real past Powerball and Mega Millions jackpot draws. If your numbers match a previous winning combination, the draw date and winning numbers appear right below your set with matches highlighted.</p>
+            <p>The odds of an exact match are astronomically low — but want to see what it looks like when it happens? Hit <strong>Simulate Match</strong> to inject a real past jackpot into one of your sets.</p>
+        </div>
+
         <div class="lotto-type-selector">
             <select id="lottoType" onchange="changeLottoType()">
                 <option value="custom">Custom</option>
@@ -58,6 +64,9 @@
             </select>
             <button class="generate-btn-inline" onclick="generateLottoNumbers()">
                 Generate Numbers
+            </button>
+            <button class="simulate-btn" id="simulateBtn" onclick="simulateLottoNumbers()">
+                Simulate Match
             </button>
         </div>
 
@@ -164,16 +173,20 @@
             const lottoType = document.getElementById('lottoType').value;
             const config = lottoConfigs[lottoType];
             const inputSection = document.getElementById('inputSection');
+            const isCustom = lottoType === 'custom';
 
             const container = document.getElementById('lottoContainer');
             container.innerHTML = '<div class="empty-state">Your numbers will appear here</div>';
             container.className = '';
 
-            if (lottoType === 'custom') {
+            if (isCustom) {
                 inputSection.classList.remove('hidden');
             } else {
                 inputSection.classList.add('hidden');
             }
+
+            document.getElementById('simulateBtn').classList.toggle('hidden', isCustom);
+            document.getElementById('featureBanner').style.display = isCustom ? 'none' : '';
 
             document.getElementById('regularMin').value = config.regularMin;
             document.getElementById('regularMax').value = config.regularMax;
@@ -183,11 +196,7 @@
             const bonusLabels = document.querySelectorAll('.input-label');
             if (bonusLabels.length >= 2) {
                 const bonusLabel = bonusLabels[1];
-                if (lottoType !== 'custom') {
-                    bonusLabel.textContent = config.bonusName + ':';
-                } else {
-                    bonusLabel.textContent = 'Bonus Number:';
-                }
+                bonusLabel.textContent = isCustom ? 'Bonus Number:' : config.bonusName + ':';
             }
         }
 
@@ -279,6 +288,42 @@
                 for (const set of allSets) {
                     matches.push(findBestMatch(set.regular, set.powerball, lottoType));
                 }
+            }
+
+            displayAllSets(allSets, bonusName, matches);
+        }
+
+        function simulateLottoNumbers() {
+            const lottoType = document.getElementById('lottoType').value;
+            if (lottoType === 'custom' || !window.LOTTO_DB) return;
+
+            const config = lottoConfigs[lottoType];
+            const dbKey = lottoType === 'megamillions' ? 'megamillions' : 'powerball';
+            const draws = LOTTO_DB[dbKey];
+            const bonusName = config.bonusName;
+
+            const jackpotDraw = draws[Math.floor(Math.random() * draws.length)];
+
+            const rigged = Math.floor(Math.random() * 5);
+            const allSets = [];
+            for (let i = 0; i < 5; i++) {
+                if (i === rigged) {
+                    allSets.push({ regular: [...jackpotDraw.n], powerball: jackpotDraw.b });
+                } else {
+                    const numbers = [];
+                    while (numbers.length < config.regularCount) {
+                        const num = Math.floor(Math.random() * (config.regularMax - config.regularMin + 1)) + config.regularMin;
+                        if (!numbers.includes(num)) numbers.push(num);
+                    }
+                    numbers.sort((a, b) => a - b);
+                    const bonus = Math.floor(Math.random() * (config.bonusMax - config.bonusMin + 1)) + config.bonusMin;
+                    allSets.push({ regular: numbers, powerball: bonus });
+                }
+            }
+
+            const matches = [];
+            for (const set of allSets) {
+                matches.push(findBestMatch(set.regular, set.powerball, lottoType));
             }
 
             displayAllSets(allSets, bonusName, matches);
