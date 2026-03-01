@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Free Lotto Number Generator</title>
+    <meta name="description" content="Learn about the free Lotto Number Generator tool for Powerball and Mega Millions. Built for entertainment — no strategy, no predictions.">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-98DMP20HK8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-98DMP20HK8');
+    </script>
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "vlgflxmt0h");
+    </script>
+    <!-- Google AdSense -->
+    <meta name="google-adsense-account" content="ca-pub-2497920379756999">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2497920379756999"
+         crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="theme-toggle" onclick="toggleTheme()" title="Toggle dark/light mode">
+            <div class="theme-toggle-slider"></div>
+        </div>
+
+        <header class="site-header">
+            <div class="site-title">Lotto Number Generator</div>
+            <nav class="site-nav" aria-label="Main navigation">
+                <a href="index.html">Home</a>
+                <a href="about.html" class="active">About</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Use</a>
+            </nav>
+        </header>
+
+        <main class="content">
+            <section class="about-section">
+                <h2>About This Tool</h2>
+                <p>This free lotto number generator helps you create random number combinations for Powerball, Mega Millions, or your own custom lottery-style game. It uses official number ranges: Powerball uses 5 numbers from 1–69 plus the Powerball (1–26); Mega Millions uses 5 numbers from 1–70 plus the Mega Ball (1–25).</p>
+                <p>We built this tool for entertainment and to help players quickly generate multiple sets of numbers. Each set is randomly generated and sorted for easy reading. No strategy or prediction is involved — every combination has an equal random chance.</p>
+                <p>For Powerball and Mega Millions, your generated numbers are automatically compared against every past jackpot draw on record. The closest historical match is shown beneath each set, with matching numbers highlighted so you can see at a glance how your picks stack up against real winning combinations.</p>
+                <p>This site is not affiliated with, endorsed by, or connected to any official lottery. Lottery play is subject to local laws and age restrictions. Please play responsibly and only spend what you can afford. This tool does not guarantee any outcome.</p>
+                <div class="disclaimer">
+                    <strong>Disclaimer:</strong> For entertainment only. Not gambling advice. Check your local laws. Must be of legal age to play lottery in your jurisdiction.
+                </div>
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <p>&copy; Lotto Number Generator. For entertainment only. Play responsibly.</p>
+        </footer>
+    </div>
+
+    <script>
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateThemeToggle(savedTheme);
+        }
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeToggle(newTheme);
+        }
+        function updateThemeToggle(theme) {
+            const slider = document.querySelector('.theme-toggle-slider');
+            if (slider) slider.textContent = theme === 'dark' ? '\u2600\uFE0F' : '\uD83C\uDF19';
+        }
+        initTheme();
+    </script>
+</body>
+</html>

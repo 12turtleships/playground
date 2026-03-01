@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy | Free Lotto Number Generator</title>
+    <meta name="description" content="Privacy policy for the free Lotto Number Generator. Learn how we handle cookies, analytics, and advertising data.">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-98DMP20HK8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-98DMP20HK8');
+    </script>
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "vlgflxmt0h");
+    </script>
+    <!-- Google AdSense -->
+    <meta name="google-adsense-account" content="ca-pub-2497920379756999">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2497920379756999"
+         crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="theme-toggle" onclick="toggleTheme()" title="Toggle dark/light mode">
+            <div class="theme-toggle-slider"></div>
+        </div>
+
+        <header class="site-header">
+            <div class="site-title">Lotto Number Generator</div>
+            <nav class="site-nav" aria-label="Main navigation">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="privacy.html" class="active">Privacy Policy</a>
+                <a href="terms.html">Terms of Use</a>
+            </nav>
+        </header>
+
+        <main class="content">
+            <section class="policy-section">
+                <h2>Privacy Policy</h2>
+                <p>We respect your privacy. This site may use cookies and similar technologies for analytics and to show relevant ads (e.g., Google AdSense). We do not sell your personal data. Third-party advertisers may collect data as described in their own privacy policies. By using this site, you agree to this policy. For questions, contact us through the channels listed on this site.</p>
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <p>&copy; Lotto Number Generator. For entertainment only. Play responsibly.</p>
+        </footer>
+    </div>
+
+    <script>
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateThemeToggle(savedTheme);
+        }
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeToggle(newTheme);
+        }
+        function updateThemeToggle(theme) {
+            const slider = document.querySelector('.theme-toggle-slider');
+            if (slider) slider.textContent = theme === 'dark' ? '\u2600\uFE0F' : '\uD83C\uDF19';
+        }
+        initTheme();
+    </script>
+</body>
+</html>
