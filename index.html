@@ -7,13 +7,13 @@
     <meta name="description" content="Generate random Powerball and Mega Millions numbers for fun. Free tool with official number ranges. For entertainment only—play responsibly.">
     <meta name="robots" content="index, follow">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="styles.css">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-98DMP20HK8"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-98DMP20HK8');
     </script>
     <!-- Microsoft Clarity -->
@@ -28,592 +28,28 @@
     <meta name="google-adsense-account" content="ca-pub-2497920379756999">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2497920379756999"
          crossorigin="anonymous"></script>
-    <style>
-        :root {
-            --bg-gradient-start: #667eea;
-            --bg-gradient-end: #764ba2;
-            --container-bg: white;
-            --text-primary: #333;
-            --text-secondary: #666;
-            --input-bg: #f8f9fa;
-            --input-border: #e0e0e0;
-            --info-bg: #f5f5f5;
-            --shadow-color: rgba(0, 0, 0, 0.3);
-        }
-
-        [data-theme="dark"] {
-            --bg-gradient-start: #1a1a2e;
-            --bg-gradient-end: #16213e;
-            --container-bg: #2d2d44;
-            --text-primary: #e0e0e0;
-            --text-secondary: #b0b0b0;
-            --input-bg: #3a3a52;
-            --input-border: #4a4a6a;
-            --info-bg: #3a3a52;
-            --shadow-color: rgba(0, 0, 0, 0.5);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            transition: background 0.3s ease;
-        }
-
-        .container {
-            background: var(--container-bg);
-            border-radius: 20px;
-            box-shadow: 0 20px 60px var(--shadow-color);
-            padding: 40px;
-            max-width: 900px;
-            width: 100%;
-            text-align: center;
-            position: relative;
-            transition: background 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .theme-toggle {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: var(--input-bg);
-            border: 2px solid var(--input-border);
-            border-radius: 50px;
-            width: 60px;
-            height: 30px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            padding: 3px;
-            transition: all 0.3s ease;
-        }
-
-        .theme-toggle:hover {
-            border-color: var(--bg-gradient-start);
-        }
-
-        .theme-toggle-slider {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            background: var(--bg-gradient-start);
-            transition: transform 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-        }
-
-        [data-theme="dark"] .theme-toggle-slider {
-            transform: translateX(30px);
-        }
-
-        h1 {
-            color: var(--text-primary);
-            margin-bottom: 10px;
-            font-size: 2.5em;
-            font-weight: 700;
-            transition: color 0.3s ease;
-        }
-
-        .subtitle {
-            color: var(--text-secondary);
-            margin-bottom: 40px;
-            font-size: 1.1em;
-            transition: color 0.3s ease;
-        }
-
-        .lotto-sets {
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-            margin: 40px 0;
-        }
-
-        .lotto-set {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .set-label {
-            color: var(--text-secondary);
-            font-size: 0.9em;
-            font-weight: 600;
-            margin-bottom: 5px;
-            transition: color 0.3s ease;
-        }
-
-        .lotto-numbers {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-            padding-bottom: 25px;
-            align-items: flex-start;
-        }
-
-        .number-ball {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8em;
-            font-weight: bold;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .number-ball:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
-        }
-
-        .powerball {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            box-shadow: 0 4px 15px rgba(245, 87, 108, 0.4);
-            position: relative;
-        }
-
-        .powerball:hover {
-            box-shadow: 0 6px 20px rgba(245, 87, 108, 0.6);
-        }
-
-        .powerball::after {
-            content: attr(data-bonus-name);
-            position: absolute;
-            bottom: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 0.5em;
-            color: #f5576c;
-            font-weight: 600;
-            white-space: nowrap;
-            overflow: visible;
-        }
-
-        .powerball-separator {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin: 0 5px;
-            font-size: 1.5em;
-            color: var(--text-secondary);
-            font-weight: bold;
-            transition: color 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: scale(0.5);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-
-        .empty-state {
-            color: var(--text-secondary);
-            font-style: italic;
-            min-height: 200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: color 0.3s ease;
-        }
-
-        .input-section {
-            background: var(--input-bg);
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 30px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            transition: background 0.3s ease, opacity 0.3s ease, max-height 0.3s ease;
-            overflow: hidden;
-        }
-
-        .input-section.hidden {
-            display: none;
-        }
-
-        .input-group {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .input-label {
-            color: var(--text-primary);
-            font-weight: 600;
-            font-size: 1em;
-            min-width: 120px;
-            text-align: left;
-            transition: color 0.3s ease;
-        }
-
-        .range-input {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .range-input input {
-            width: 80px;
-            padding: 10px 15px;
-            border: 2px solid var(--input-border);
-            border-radius: 8px;
-            font-size: 1em;
-            text-align: center;
-            background: var(--container-bg);
-            color: var(--text-primary);
-            transition: border-color 0.3s ease, background 0.3s ease, color 0.3s ease;
-        }
-
-        .range-input input:focus {
-            outline: none;
-            border-color: var(--bg-gradient-start);
-        }
-
-        .range-separator {
-            color: var(--text-secondary);
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
-
-        .lotto-type-selector {
-            margin-bottom: 25px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .lotto-type-selector select {
-            padding: 12px 20px;
-            border: 2px solid var(--input-border);
-            border-radius: 10px;
-            font-size: 1em;
-            font-weight: 600;
-            background: var(--container-bg);
-            color: var(--text-primary);
-            cursor: pointer;
-            transition: border-color 0.3s ease, background 0.3s ease;
-            min-width: 200px;
-        }
-
-        .lotto-type-selector select:hover {
-            border-color: var(--bg-gradient-start);
-        }
-
-        .lotto-type-selector select:focus {
-            outline: none;
-            border-color: var(--bg-gradient-start);
-        }
-
-        .generate-btn-inline {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            font-size: 1em;
-            font-weight: 600;
-            border-radius: 10px;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .generate-btn-inline:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
-        }
-
-        .generate-btn-inline:active {
-            transform: translateY(0);
-        }
-
-        .info {
-            margin-top: 30px;
-            padding: 15px;
-            background: var(--info-bg);
-            border-radius: 10px;
-            color: var(--text-secondary);
-            font-size: 0.9em;
-            transition: background 0.3s ease, color 0.3s ease;
-        }
-
-        .ad-container {
-            margin: 24px 0;
-            min-height: 90px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .ad-container ins {
-            display: block;
-            text-align: center;
-        }
-
-        .ad-label {
-            font-size: 0.75em;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 8px;
-        }
-
-        .site-header {
-            text-align: center;
-            margin-bottom: 24px;
-            padding-bottom: 16px;
-            border-bottom: 1px solid var(--input-border);
-        }
-
-        .site-title {
-            font-size: 1.25em;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 12px;
-        }
-
-        .site-nav {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .site-nav a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.95em;
-            transition: color 0.2s ease;
-        }
-
-        .site-nav a:hover {
-            color: var(--bg-gradient-start);
-        }
-
-        main.content {
-            text-align: left;
-        }
-
-        main.content .center-block {
-            text-align: center;
-        }
-
-        .about-section, .policy-section {
-            margin-top: 32px;
-            padding: 24px;
-            background: var(--info-bg);
-            border-radius: 12px;
-            color: var(--text-secondary);
-            font-size: 0.95em;
-            line-height: 1.6;
-        }
-
-        .about-section h2, .policy-section h2 {
-            color: var(--text-primary);
-            font-size: 1.25em;
-            margin-bottom: 12px;
-        }
-
-        .about-section p, .policy-section p {
-            margin-bottom: 12px;
-        }
-
-        .about-section p:last-child, .policy-section p:last-child {
-            margin-bottom: 0;
-        }
-
-        .disclaimer {
-            font-size: 0.9em;
-            color: var(--text-secondary);
-            margin-top: 16px;
-            padding: 12px;
-            border-left: 4px solid var(--bg-gradient-start);
-            background: var(--input-bg);
-            border-radius: 0 8px 8px 0;
-        }
-
-        .site-footer {
-            margin-top: 40px;
-            padding-top: 24px;
-            border-top: 1px solid var(--input-border);
-            text-align: center;
-            font-size: 0.85em;
-            color: var(--text-secondary);
-        }
-
-        .site-footer a {
-            color: var(--text-secondary);
-            text-decoration: none;
-        }
-
-        .site-footer a:hover {
-            text-decoration: underline;
-        }
-
-        .site-footer .links {
-            margin-bottom: 8px;
-        }
-
-        .site-footer .links a {
-            margin: 0 10px;
-        }
-
-        .match-info {
-            background: var(--info-bg);
-            border-radius: 10px;
-            padding: 12px 16px;
-            margin-top: 5px;
-            font-size: 0.85em;
-            color: var(--text-secondary);
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            width: 100%;
-            max-width: 580px;
-            transition: background 0.3s ease;
-            border-left: 4px solid var(--input-border);
-        }
-
-        .match-info.match-jackpot {
-            background: linear-gradient(135deg, rgba(255,215,0,0.15) 0%, rgba(255,179,71,0.15) 100%);
-            border-left-color: #ffd700;
-        }
-
-        [data-theme="dark"] .match-info.match-jackpot {
-            background: linear-gradient(135deg, rgba(255,215,0,0.1) 0%, rgba(255,179,71,0.1) 100%);
-        }
-
-        .match-info.match-high {
-            border-left-color: #667eea;
-            background: linear-gradient(135deg, rgba(102,126,234,0.08) 0%, rgba(118,75,162,0.08) 100%);
-        }
-
-        .match-info-header {
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .match-badge {
-            display: inline-block;
-            padding: 2px 10px;
-            border-radius: 20px;
-            font-size: 0.8em;
-            font-weight: 700;
-        }
-
-        .match-badge.jackpot {
-            background: linear-gradient(135deg, #ffd700 0%, #ffb347 100%);
-            color: #333;
-        }
-
-        .match-badge.high {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-
-        .match-date {
-            font-size: 0.9em;
-            opacity: 0.8;
-        }
-
-        .match-numbers {
-            display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
-            align-items: center;
-            margin-top: 4px;
-        }
-
-        .match-num {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8em;
-            font-weight: 600;
-            background: var(--input-bg);
-            color: var(--text-secondary);
-            transition: background 0.3s ease, color 0.3s ease;
-        }
-
-        .match-num.matched {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-
-        .match-num.bonus-ball {
-            border: 2px solid #f5576c;
-        }
-
-        .match-num.bonus-ball.matched {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
-            border: none;
-        }
-
-        .match-plus {
-            font-weight: bold;
-            color: var(--text-secondary);
-            font-size: 0.85em;
-        }
-    </style>
 </head>
 <body>
     <div class="container">
         <div class="theme-toggle" onclick="toggleTheme()" title="Toggle dark/light mode">
-            <div class="theme-toggle-slider">🌙</div>
+            <div class="theme-toggle-slider"></div>
         </div>
 
         <header class="site-header">
             <div class="site-title">Lotto Number Generator</div>
             <nav class="site-nav" aria-label="Main navigation">
-                <a href="#generator">Home</a>
-                <a href="#about">About</a>
-                <a href="#privacy">Privacy Policy</a>
-                <a href="#terms">Terms of Use</a>
+                <a href="index.html" class="active">Home</a>
+                <a href="about.html">About</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Use</a>
             </nav>
         </header>
 
         <main class="content">
         <section id="generator" class="center-block">
-        <h1>🎰 Free Lotto Number Generator</h1>
+        <h1>Free Lotto Number Generator</h1>
         <p class="subtitle">Choose Powerball, Mega Millions, or custom ranges and generate random numbers for entertainment.</p>
-        
+
         <div class="lotto-type-selector">
             <select id="lottoType" onchange="changeLottoType()">
                 <option value="custom">Custom</option>
@@ -625,7 +61,6 @@
             </button>
         </div>
 
-        <!-- Google AdSense: create an ad unit at google.com/adsense to get your data-ad-slot value -->
         <div class="ad-container" aria-label="Advertisement">
             <div class="ad-label">Advertisement</div>
             <ins class="adsbygoogle"
@@ -666,42 +101,15 @@
             <strong>How it works:</strong> Select Powerball or Mega Millions for preset configurations, or choose "Custom" to set your own ranges. The generator creates 5 sets of numbers, each sorted in ascending order. For Powerball and Mega Millions, each set is compared against all past jackpot draws to find the closest historical match — matched numbers are highlighted.
         </div>
         </section>
-
-        <section id="about" class="about-section">
-            <h2>About This Tool</h2>
-            <p>This free lotto number generator helps you create random number combinations for Powerball, Mega Millions, or your own custom lottery-style game. It uses official number ranges: Powerball uses 5 numbers from 1–69 plus the Powerball (1–26); Mega Millions uses 5 numbers from 1–70 plus the Mega Ball (1–25).</p>
-            <p>We built this tool for entertainment and to help players quickly generate multiple sets of numbers. Each set is randomly generated and sorted for easy reading. No strategy or prediction is involved—every combination has an equal random chance.</p>
-            <p>This site is not affiliated with, endorsed by, or connected to any official lottery. Lottery play is subject to local laws and age restrictions. Please play responsibly and only spend what you can afford. This tool does not guarantee any outcome.</p>
-            <div class="disclaimer">
-                <strong>Disclaimer:</strong> For entertainment only. Not gambling advice. Check your local laws. Must be of legal age to play lottery in your jurisdiction.
-            </div>
-        </section>
-
-        <section id="privacy" class="policy-section">
-            <h2>Privacy Policy</h2>
-            <p>We respect your privacy. This site may use cookies and similar technologies for analytics and to show relevant ads (e.g., Google AdSense). We do not sell your personal data. Third-party advertisers may collect data as described in their own privacy policies. By using this site, you agree to this policy. For questions, contact us through the channels listed on this site.</p>
-        </section>
-
-        <section id="terms" class="policy-section">
-            <h2>Terms of Use</h2>
-            <p>You may use this free lotto number generator for personal, non-commercial entertainment. Do not use it for any illegal purpose or in any way that violates lottery rules in your area. We provide the tool "as is" without warranties. We are not liable for any loss or damage arising from your use of the generated numbers or this website. By using this site, you agree to these terms.</p>
-        </section>
+        </main>
 
         <footer class="site-footer">
-            <div class="links">
-                <a href="#generator">Home</a>
-                <a href="#about">About</a>
-                <a href="#privacy">Privacy Policy</a>
-                <a href="#terms">Terms of Use</a>
-            </div>
             <p>&copy; Lotto Number Generator. For entertainment only. Play responsibly.</p>
         </footer>
-        </main>
     </div>
 
     <script src="lotto-db.js"></script>
     <script>
-        // Theme management
         function initTheme() {
             const savedTheme = localStorage.getItem('theme') || 'light';
             document.documentElement.setAttribute('data-theme', savedTheme);
@@ -719,14 +127,12 @@
         function updateThemeToggle(theme) {
             const slider = document.querySelector('.theme-toggle-slider');
             if (slider) {
-                slider.textContent = theme === 'dark' ? '☀️' : '🌙';
+                slider.textContent = theme === 'dark' ? '\u2600\uFE0F' : '\uD83C\uDF19';
             }
         }
 
-        // Initialize theme on page load
         initTheme();
 
-        // Lotto type configurations
         const lottoConfigs = {
             powerball: {
                 regularMin: 1,
@@ -758,26 +164,22 @@
             const lottoType = document.getElementById('lottoType').value;
             const config = lottoConfigs[lottoType];
             const inputSection = document.getElementById('inputSection');
-            
-            // Clear the displayed numbers and show empty state
+
             const container = document.getElementById('lottoContainer');
             container.innerHTML = '<div class="empty-state">Your numbers will appear here</div>';
             container.className = '';
-            
-            // Show/hide input section based on lotto type
+
             if (lottoType === 'custom') {
                 inputSection.classList.remove('hidden');
             } else {
                 inputSection.classList.add('hidden');
             }
-            
-            // Always update the values (even if hidden) for consistency
+
             document.getElementById('regularMin').value = config.regularMin;
             document.getElementById('regularMax').value = config.regularMax;
             document.getElementById('bonusMin').value = config.bonusMin;
             document.getElementById('bonusMax').value = config.bonusMax;
-            
-            // Update bonus label
+
             const bonusLabels = document.querySelectorAll('.input-label');
             if (bonusLabels.length >= 2) {
                 const bonusLabel = bonusLabels[1];
@@ -789,7 +191,6 @@
             }
         }
 
-        // Initialize lotto type on page load
         changeLottoType();
 
         function findBestMatch(regularNums, bonusNum, lottoType) {
@@ -967,7 +368,7 @@
 
             const dateSpan = document.createElement('span');
             dateSpan.className = 'match-date';
-            dateSpan.textContent = '— ' + formatMatchDate(match.date);
+            dateSpan.textContent = '\u2014 ' + formatMatchDate(match.date);
             header.appendChild(dateSpan);
 
             div.appendChild(header);
@@ -997,9 +398,6 @@
             div.appendChild(numsDiv);
             return div;
         }
-
-        // Generate numbers on page load (optional)
-        // generateLottoNumbers();
     </script>
 </body>
 </html>
