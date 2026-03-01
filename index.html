@@ -179,6 +179,7 @@
 
         <div class="attempt-counter hidden" id="attemptCounter">
             Attempt: <span id="attemptNum">0</span>
+            <span id="attemptStatus"></span>
         </div>
 
         <div class="input-section hidden" id="inputSection">
@@ -432,10 +433,13 @@
 
             var hasJackpot = matches.some(function(m) { return m && m.regularMatches === 5 && m.bonusMatch; });
             var counterEl = document.getElementById('attemptCounter');
+            var statusEl = document.getElementById('attemptStatus');
             if (hasJackpot) {
                 counterEl.classList.add('attempt-hit');
+                statusEl.textContent = ' — Jackpot Match Found!';
             } else {
                 counterEl.classList.remove('attempt-hit');
+                statusEl.textContent = '';
             }
         }
 
