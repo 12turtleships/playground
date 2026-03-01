@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://lotto-generator.example.com/sitemap.xml
+Sitemap: https://lotto-number-generator.com/sitemap.xml
