@@ -694,6 +694,40 @@ h1 {
     font-size: 1.1em;
 }
 
+/* ── Attempt counter ──────────────────────────────────── */
+
+.attempt-counter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 16px;
+    padding: 10px 20px;
+    background: var(--info-bg);
+    border-radius: 10px;
+    font-size: 0.9em;
+    color: var(--text-secondary);
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.attempt-counter.hidden {
+    display: none;
+}
+
+.attempt-count strong {
+    color: var(--text-primary);
+    font-size: 1.1em;
+}
+
+.attempt-sep {
+    opacity: 0.4;
+}
+
+.attempt-status.attempt-hit {
+    color: #ffa500;
+    font-weight: 700;
+}
+
 /* ── Footer ───────────────────────────────────────────── */
 
 .site-footer {
