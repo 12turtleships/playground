@@ -651,47 +651,65 @@ h1 {
     transition: color 0.3s ease;
 }
 
-/* ── Action buttons (copy / save) ─────────────────────── */
+/* ── Toolbar (copy / save / share) ────────────────────── */
 
-.action-buttons {
+.toolbar {
     display: flex;
+    align-items: center;
     justify-content: center;
-    gap: 12px;
+    gap: 0;
     margin-top: 10px;
-    flex-wrap: wrap;
+    background: var(--input-bg);
+    border: 1px solid var(--input-border);
+    border-radius: 12px;
+    padding: 6px 10px;
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+    transition: background 0.3s ease, border-color 0.3s ease;
 }
 
-.action-buttons.hidden {
+.toolbar.hidden {
     display: none;
 }
 
-.action-btn {
-    background: var(--input-bg);
-    color: var(--text-primary);
-    border: 2px solid var(--input-border);
-    padding: 10px 20px;
-    font-size: 0.9em;
-    font-weight: 600;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+.toolbar-group {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 4px;
+}
+
+.toolbar-divider {
+    width: 1px;
+    height: 24px;
+    background: var(--input-border);
+    margin: 0 10px;
+    flex-shrink: 0;
+    transition: background 0.3s ease;
+}
+
+.action-btn {
+    background: none;
+    color: var(--text-secondary);
+    border: none;
+    padding: 6px 12px;
+    font-size: 0.82em;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: color 0.2s ease, background 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
 .action-btn:hover {
-    border-color: var(--bg-gradient-start);
-    background: var(--info-bg);
-    transform: translateY(-1px);
+    color: var(--text-primary);
+    background: var(--container-bg);
 }
 
-.action-btn:active {
-    transform: translateY(0);
-}
-
-.action-icon {
-    font-size: 1.1em;
+.action-btn svg {
+    flex-shrink: 0;
 }
 
 /* ── Share bar ────────────────────────────────────────── */
@@ -708,8 +726,8 @@ h1 {
 }
 
 .share-icon {
-    width: 42px;
-    height: 42px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     border: none;
     cursor: pointer;
