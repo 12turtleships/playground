@@ -380,7 +380,7 @@
                 setDiv.appendChild(numbersDiv);
 
                 const match = matches[setIndex];
-                if (match) {
+                if (match && match.regularMatches === 5 && match.bonusMatch) {
                     setDiv.appendChild(buildMatchInfo(match, bonusName));
                 }
 
