@@ -209,6 +209,12 @@
             </button>
         </div>
 
+        <div class="attempt-counter hidden" id="attemptCounter">
+            <span class="attempt-count">Attempt <strong id="attemptNum">0</strong></span>
+            <span class="attempt-sep">&middot;</span>
+            <span class="attempt-status" id="attemptStatus">No jackpot match yet</span>
+        </div>
+
         <div class="info" role="complementary">
             <strong>How it works:</strong> Choose Powerball, Mega Millions, or Custom → click Generate → get 5 random sets checked against all past jackpot draws. Copy or save your picks with the buttons below your results.
         </div>
@@ -247,6 +253,8 @@
         }
 
         initTheme();
+
+        var attemptCount = 0;
 
         const lottoConfigs = {
             powerball: {
@@ -292,6 +300,8 @@
             }
 
             document.getElementById('featureBanner').style.display = isCustom ? 'none' : '';
+            attemptCount = 0;
+            document.getElementById('attemptCounter').classList.add('hidden');
 
             document.getElementById('regularMin').value = config.regularMin;
             document.getElementById('regularMax').value = config.regularMax;
@@ -374,6 +384,10 @@
                 return;
             }
 
+            attemptCount++;
+            document.getElementById('attemptNum').textContent = attemptCount;
+            document.getElementById('attemptCounter').classList.remove('hidden');
+
             const allSets = [];
             for (let setIndex = 0; setIndex < setsCount; setIndex++) {
                 const numbers = [];
@@ -396,6 +410,16 @@
             }
 
             displayAllSets(allSets, bonusName, matches);
+
+            var hasJackpot = matches.some(function(m) { return m && m.regularMatches === 5 && m.bonusMatch; });
+            var statusEl = document.getElementById('attemptStatus');
+            if (hasJackpot) {
+                statusEl.textContent = 'Jackpot match found!';
+                statusEl.className = 'attempt-status attempt-hit';
+            } else {
+                statusEl.textContent = 'No jackpot match yet';
+                statusEl.className = 'attempt-status';
+            }
         }
 
         function displayAllSets(allSets, bonusName = 'Bonus', matches = []) {
