@@ -3,11 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free Lotto Number Generator | Powerball &amp; Mega Millions Picks</title>
-    <meta name="description" content="Generate random Powerball and Mega Millions numbers for fun. Free tool with official number ranges. For entertainment only—play responsibly.">
+    <title>Free Lotto Number Generator – Powerball &amp; Mega Millions Random Picks</title>
+    <meta name="description" content="Generate random Powerball and Mega Millions lottery numbers instantly. Free tool with official number ranges, checked against 4,000+ past jackpot draws. For entertainment only.">
     <meta name="robots" content="index, follow">
+    <link rel="canonical" href="index.html">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="styles.css">
+    <!-- Open Graph -->
+    <meta property="og:title" content="Free Lotto Number Generator – Powerball &amp; Mega Millions">
+    <meta property="og:description" content="Generate random Powerball and Mega Millions numbers instantly. Free tool checked against 4,000+ past jackpot draws.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="index.html">
+    <meta property="og:site_name" content="Lotto Number Generator">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Free Lotto Number Generator – Powerball &amp; Mega Millions">
+    <meta name="twitter:description" content="Generate random Powerball and Mega Millions numbers instantly. Free tool checked against 4,000+ past jackpot draws.">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-98DMP20HK8"></script>
     <script>
@@ -28,6 +39,42 @@
     <meta name="google-adsense-account" content="ca-pub-2497920379756999">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2497920379756999"
          crossorigin="anonymous"></script>
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Free Lotto Number Generator",
+      "description": "Generate random Powerball and Mega Millions lottery numbers. Each set is checked against thousands of real past jackpot draws.",
+      "applicationCategory": "UtilityApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "browserRequirements": "Requires JavaScript",
+      "softwareVersion": "1.0",
+      "creator": {
+        "@type": "Organization",
+        "name": "Lotto Number Generator"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "index.html"
+        }
+      ]
+    }
+    </script>
 </head>
 <body>
     <div class="container">
@@ -46,9 +93,12 @@
         </header>
 
         <main class="content">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <span class="current">Home</span>
+        </nav>
         <section id="generator" class="center-block">
         <h1>Free Lotto Number Generator</h1>
-        <p class="subtitle">Choose Powerball, Mega Millions, or custom ranges and generate random numbers for entertainment.</p>
+        <p class="subtitle">Generate random <strong>Powerball</strong>, <strong>Mega Millions</strong>, or custom lottery numbers — checked against thousands of real past jackpot draws.</p>
 
         <div class="db-status-warning" id="dbStatus" style="display:none">
             Historical jackpot database could not be loaded. Match checking and Simulate Match are unavailable. Make sure <code>lotto-db.js</code> is served alongside this page.
@@ -107,8 +157,9 @@
             <div class="empty-state">Your numbers will appear here</div>
         </div>
 
-        <div class="info">
-            <strong>How it works:</strong> Select Powerball or Mega Millions for preset configurations, or choose "Custom" to set your own ranges. The generator creates 5 sets of numbers, each sorted in ascending order. For Powerball and Mega Millions, each set is compared against all past jackpot draws to find the closest historical match — matched numbers are highlighted.
+        <div class="info" role="complementary">
+            <h2 style="font-size:1em; margin-bottom:6px;">How It Works</h2>
+            <p>Select Powerball or Mega Millions for preset configurations, or choose “Custom” to set your own ranges. The generator creates 5 sets of numbers, each sorted in ascending order. For Powerball and Mega Millions, each set is compared against all past jackpot draws to find the closest historical match — matched numbers are highlighted.</p>
         </div>
         </section>
         </main>
