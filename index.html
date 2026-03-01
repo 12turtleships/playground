@@ -487,6 +487,110 @@
         .site-footer .links a {
             margin: 0 10px;
         }
+
+        .match-info {
+            background: var(--info-bg);
+            border-radius: 10px;
+            padding: 12px 16px;
+            margin-top: 5px;
+            font-size: 0.85em;
+            color: var(--text-secondary);
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            width: 100%;
+            max-width: 580px;
+            transition: background 0.3s ease;
+            border-left: 4px solid var(--input-border);
+        }
+
+        .match-info.match-jackpot {
+            background: linear-gradient(135deg, rgba(255,215,0,0.15) 0%, rgba(255,179,71,0.15) 100%);
+            border-left-color: #ffd700;
+        }
+
+        [data-theme="dark"] .match-info.match-jackpot {
+            background: linear-gradient(135deg, rgba(255,215,0,0.1) 0%, rgba(255,179,71,0.1) 100%);
+        }
+
+        .match-info.match-high {
+            border-left-color: #667eea;
+            background: linear-gradient(135deg, rgba(102,126,234,0.08) 0%, rgba(118,75,162,0.08) 100%);
+        }
+
+        .match-info-header {
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .match-badge {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 700;
+        }
+
+        .match-badge.jackpot {
+            background: linear-gradient(135deg, #ffd700 0%, #ffb347 100%);
+            color: #333;
+        }
+
+        .match-badge.high {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .match-date {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        .match-numbers {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            align-items: center;
+            margin-top: 4px;
+        }
+
+        .match-num {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8em;
+            font-weight: 600;
+            background: var(--input-bg);
+            color: var(--text-secondary);
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .match-num.matched {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .match-num.bonus-ball {
+            border: 2px solid #f5576c;
+        }
+
+        .match-num.bonus-ball.matched {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border: none;
+        }
+
+        .match-plus {
+            font-weight: bold;
+            color: var(--text-secondary);
+            font-size: 0.85em;
+        }
     </style>
 </head>
 <body>
@@ -559,7 +663,7 @@
         </div>
 
         <div class="info">
-            <strong>How it works:</strong> Select Powerball or Mega Millions for preset configurations, or choose "Custom" to set your own ranges. The generator creates 5 sets of numbers, each sorted in ascending order.
+            <strong>How it works:</strong> Select Powerball or Mega Millions for preset configurations, or choose "Custom" to set your own ranges. The generator creates 5 sets of numbers, each sorted in ascending order. For Powerball and Mega Millions, each set is compared against all past jackpot draws to find the closest historical match — matched numbers are highlighted.
         </div>
         </section>
 
@@ -595,6 +699,7 @@
         </main>
     </div>
 
+    <script src="lotto-db.js"></script>
     <script>
         // Theme management
         function initTheme() {
@@ -687,8 +792,50 @@
         // Initialize lotto type on page load
         changeLottoType();
 
+        function findBestMatch(regularNums, bonusNum, lottoType) {
+            if (!window.LOTTO_DB) return null;
+            const dbKey = lottoType === 'megamillions' ? 'megamillions' : 'powerball';
+            const draws = LOTTO_DB[dbKey];
+            if (!draws) return null;
+
+            let bestMatch = null;
+            let bestScore = -1;
+
+            for (const draw of draws) {
+                let regularMatches = 0;
+                const matchedNums = new Set();
+                for (const num of regularNums) {
+                    if (draw.n.includes(num)) {
+                        regularMatches++;
+                        matchedNums.add(num);
+                    }
+                }
+                const bonusMatch = bonusNum === draw.b;
+                const score = regularMatches * 2 + (bonusMatch ? 1 : 0);
+
+                if (score > bestScore) {
+                    bestScore = score;
+                    bestMatch = {
+                        date: draw.d,
+                        numbers: [...draw.n],
+                        bonus: draw.b,
+                        regularMatches,
+                        bonusMatch,
+                        matchedNums,
+                        multiplier: draw.m
+                    };
+                }
+            }
+
+            return bestMatch;
+        }
+
+        function formatMatchDate(isoDate) {
+            const d = new Date(isoDate + 'T00:00:00');
+            return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+        }
+
         function generateLottoNumbers() {
-            // Get values from input fields
             const lottoType = document.getElementById('lottoType').value;
             const config = lottoConfigs[lottoType];
             const min = parseInt(document.getElementById('regularMin').value) || config.regularMin;
@@ -699,7 +846,6 @@
             const setsCount = 5;
             const bonusName = config.bonusName;
 
-            // Validate ranges
             if (min >= max) {
                 alert('Regular number minimum must be less than maximum!');
                 return;
@@ -713,53 +859,47 @@
                 return;
             }
 
-            // Generate 5 sets of numbers
             const allSets = [];
             for (let setIndex = 0; setIndex < setsCount; setIndex++) {
                 const numbers = [];
-
-                // Generate unique random regular numbers for this set
                 while (numbers.length < regularCount) {
                     const num = Math.floor(Math.random() * (max - min + 1)) + min;
                     if (!numbers.includes(num)) {
                         numbers.push(num);
                     }
                 }
-
-                // Sort regular numbers in ascending order
                 numbers.sort((a, b) => a - b);
-
-                // Generate bonus/powerball number
                 const powerball = Math.floor(Math.random() * (powerballMax - powerballMin + 1)) + powerballMin;
-
                 allSets.push({ regular: numbers, powerball: powerball });
             }
 
-            // Display all sets
-            displayAllSets(allSets, bonusName);
+            const matches = [];
+            if (lottoType !== 'custom' && window.LOTTO_DB) {
+                for (const set of allSets) {
+                    matches.push(findBestMatch(set.regular, set.powerball, lottoType));
+                }
+            }
+
+            displayAllSets(allSets, bonusName, matches);
         }
 
-        function displayAllSets(allSets, bonusName = 'Bonus') {
+        function displayAllSets(allSets, bonusName = 'Bonus', matches = []) {
             const container = document.getElementById('lottoContainer');
             container.innerHTML = '';
             container.className = 'lotto-sets';
 
             allSets.forEach((set, setIndex) => {
-                // Create set container
                 const setDiv = document.createElement('div');
                 setDiv.className = 'lotto-set';
 
-                // Create set label
                 const label = document.createElement('div');
                 label.className = 'set-label';
                 label.textContent = `Set ${setIndex + 1}`;
                 setDiv.appendChild(label);
 
-                // Create numbers container
                 const numbersDiv = document.createElement('div');
                 numbersDiv.className = 'lotto-numbers';
 
-                // Create regular number balls
                 set.regular.forEach((num, numIndex) => {
                     const ball = document.createElement('div');
                     ball.className = 'number-ball';
@@ -768,14 +908,12 @@
                     numbersDiv.appendChild(ball);
                 });
 
-                // Add separator
                 const separator = document.createElement('div');
                 separator.className = 'powerball-separator';
                 separator.textContent = '+';
                 separator.style.animationDelay = `${(setIndex * 0.3) + (set.regular.length * 0.1)}s`;
                 numbersDiv.appendChild(separator);
 
-                // Create powerball/bonus number
                 const powerball = document.createElement('div');
                 powerball.className = 'number-ball powerball';
                 powerball.textContent = set.powerball;
@@ -784,8 +922,80 @@
                 numbersDiv.appendChild(powerball);
 
                 setDiv.appendChild(numbersDiv);
+
+                const match = matches[setIndex];
+                if (match) {
+                    setDiv.appendChild(buildMatchInfo(match, bonusName));
+                }
+
                 container.appendChild(setDiv);
             });
+        }
+
+        function buildMatchInfo(match, bonusName) {
+            const isJackpot = match.regularMatches === 5 && match.bonusMatch;
+            const isFiveMatch = match.regularMatches === 5;
+            const isHigh = match.regularMatches >= 4;
+
+            const div = document.createElement('div');
+            div.className = 'match-info';
+            if (isJackpot) div.classList.add('match-jackpot');
+            else if (isHigh) div.classList.add('match-high');
+
+            const header = document.createElement('div');
+            header.className = 'match-info-header';
+
+            let summaryText = `${match.regularMatches}/5`;
+            if (match.bonusMatch) summaryText += ` + ${bonusName}`;
+            summaryText += ' matched';
+
+            if (isJackpot) {
+                const badge = document.createElement('span');
+                badge.className = 'match-badge jackpot';
+                badge.textContent = 'JACKPOT MATCH!';
+                header.appendChild(badge);
+            } else if (isFiveMatch) {
+                const badge = document.createElement('span');
+                badge.className = 'match-badge high';
+                badge.textContent = '5 NUMBER MATCH!';
+                header.appendChild(badge);
+            }
+
+            const summary = document.createElement('span');
+            summary.textContent = summaryText;
+            header.appendChild(summary);
+
+            const dateSpan = document.createElement('span');
+            dateSpan.className = 'match-date';
+            dateSpan.textContent = '— ' + formatMatchDate(match.date);
+            header.appendChild(dateSpan);
+
+            div.appendChild(header);
+
+            const numsDiv = document.createElement('div');
+            numsDiv.className = 'match-numbers';
+
+            for (const n of match.numbers) {
+                const numEl = document.createElement('span');
+                numEl.className = 'match-num';
+                if (match.matchedNums.has(n)) numEl.classList.add('matched');
+                numEl.textContent = n;
+                numsDiv.appendChild(numEl);
+            }
+
+            const plus = document.createElement('span');
+            plus.className = 'match-plus';
+            plus.textContent = '+';
+            numsDiv.appendChild(plus);
+
+            const bonusEl = document.createElement('span');
+            bonusEl.className = 'match-num bonus-ball';
+            if (match.bonusMatch) bonusEl.classList.add('matched');
+            bonusEl.textContent = match.bonus;
+            numsDiv.appendChild(bonusEl);
+
+            div.appendChild(numsDiv);
+            return div;
         }
 
         // Generate numbers on page load (optional)
