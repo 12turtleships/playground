@@ -634,6 +634,7 @@ h1 {
     transition: background 0.3s ease;
 }
 
+.faq-item h2,
 .faq-item h3 {
     color: var(--text-primary);
     font-size: 0.95em;
