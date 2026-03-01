@@ -697,63 +697,68 @@ h1 {
 /* ── Share bar ────────────────────────────────────────── */
 
 .share-bar {
-    text-align: center;
-    margin-top: 12px;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 14px;
 }
 
 .share-bar.hidden {
     display: none;
 }
 
-.share-label {
-    display: block;
-    font-size: 0.8em;
-    color: var(--text-secondary);
-    margin-bottom: 8px;
-    letter-spacing: 0.03em;
-    transition: color 0.3s ease;
-}
-
-.share-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    flex-wrap: wrap;
-}
-
-.share-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    padding: 7px 14px;
-    font-size: 0.82em;
-    font-weight: 600;
+.share-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
     border: none;
-    border-radius: 8px;
     cursor: pointer;
-    color: white;
-    transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.share-btn:hover {
-    transform: translateY(-1px);
-    opacity: 0.9;
+.share-icon:hover {
+    transform: scale(1.15);
 }
 
-.share-btn:active {
-    transform: translateY(0);
+.share-icon:active {
+    transform: scale(1.0);
 }
 
-.share-btn svg {
+.share-icon svg {
     flex-shrink: 0;
 }
 
-.share-x { background: #000; }
-.share-fb { background: #1877f2; }
-.share-reddit { background: #ff4500; }
-.share-wa { background: #25d366; }
+.share-x {
+    background: #000;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.25);
+}
+.share-fb {
+    background: #1877f2;
+    box-shadow: 0 3px 10px rgba(24,119,242,0.35);
+}
+.share-reddit {
+    background: #ff4500;
+    box-shadow: 0 3px 10px rgba(255,69,0,0.35);
+}
+.share-wa {
+    background: #25d366;
+    box-shadow: 0 3px 10px rgba(37,211,102,0.35);
+}
 
-[data-theme="dark"] .share-x { background: #333; }
+.share-icon:hover.share-x  { box-shadow: 0 5px 16px rgba(0,0,0,0.35); }
+.share-icon:hover.share-fb  { box-shadow: 0 5px 16px rgba(24,119,242,0.5); }
+.share-icon:hover.share-reddit { box-shadow: 0 5px 16px rgba(255,69,0,0.5); }
+.share-icon:hover.share-wa { box-shadow: 0 5px 16px rgba(37,211,102,0.5); }
+
+[data-theme="dark"] .share-x {
+    background: #e7e9ea;
+}
+[data-theme="dark"] .share-x svg {
+    fill: #000;
+}
 
 /* ── Attempt counter ──────────────────────────────────── */
 
