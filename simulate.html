@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free Lotto Number Generator | Powerball &amp; Mega Millions Picks</title>
-    <meta name="description" content="Generate random Powerball and Mega Millions numbers for fun. Free tool with official number ranges. For entertainment only—play responsibly.">
+    <title>Simulate Jackpot Match | Free Lotto Number Generator</title>
+    <meta name="description" content="See what it looks like when your lotto numbers match a real past jackpot. Simulates a match using actual Powerball and Mega Millions winning numbers.">
     <meta name="robots" content="index, follow">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="styles.css">
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-98DMP20HK8"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -16,7 +15,6 @@
       gtag('js', new Date());
       gtag('config', 'G-98DMP20HK8');
     </script>
-    <!-- Microsoft Clarity -->
     <script type="text/javascript">
         (function(c,l,a,r,i,t,y){
             c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -24,7 +22,6 @@
             y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
         })(window, document, "clarity", "script", "vlgflxmt0h");
     </script>
-    <!-- Google AdSense -->
     <meta name="google-adsense-account" content="ca-pub-2497920379756999">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2497920379756999"
          crossorigin="anonymous"></script>
@@ -38,7 +35,7 @@
         <header class="site-header">
             <div class="site-title">Lotto Number Generator</div>
             <nav class="site-nav" aria-label="Main navigation">
-                <a href="index.html" class="active">Home</a>
+                <a href="index.html">Home</a>
                 <a href="about.html">About</a>
                 <a href="privacy.html">Privacy Policy</a>
                 <a href="terms.html">Terms of Use</a>
@@ -46,69 +43,32 @@
         </header>
 
         <main class="content">
-        <section id="generator" class="center-block">
-        <h1>Free Lotto Number Generator</h1>
-        <p class="subtitle">Choose Powerball, Mega Millions, or custom ranges and generate random numbers for entertainment.</p>
+        <section class="center-block">
+        <h1>Simulate Jackpot Match</h1>
+        <p class="subtitle">One of the 5 generated sets will use a real past jackpot-winning combination. Hit Generate to see a guaranteed match.</p>
 
-        <div class="db-status-warning" id="dbStatus" style="display:none">
-            Historical jackpot database could not be loaded. Match checking and Simulate Match are unavailable. Make sure <code>lotto-db.js</code> is served alongside this page.
-        </div>
-
-        <div class="feature-banner" id="featureBanner">
-            <div class="feature-banner-title">Did your numbers ever win a jackpot?</div>
-            <p>Every time you generate numbers, we check all 5 sets against thousands of real past Powerball and Mega Millions jackpot draws. If your numbers match a previous winning combination, the draw date and winning numbers appear right below your set with matches highlighted.</p>
-            <p>The odds of an exact match are astronomically low — but want to see what it looks like when it happens? <a href="simulate.html"><strong>Try the Jackpot Match Simulator</strong></a> to see a guaranteed match using real past winning numbers.</p>
+        <div class="feature-banner">
+            <div class="feature-banner-title">How does this work?</div>
+            <p>Each time you press <strong>Generate Numbers</strong>, we pick a random real past winning draw from the database and inject its exact numbers into one of the five sets. The other four sets are generated randomly. The matched set will display a <strong>JACKPOT MATCH!</strong> badge with the original draw date.</p>
+            <p>This is a demonstration only &mdash; in real play, the odds of matching all numbers are about 1 in 300 million.</p>
         </div>
 
         <div class="lotto-type-selector">
-            <select id="lottoType" onchange="changeLottoType()">
-                <option value="custom">Custom</option>
+            <select id="lottoType">
                 <option value="powerball" selected>Powerball</option>
                 <option value="megamillions">Mega Millions</option>
             </select>
-            <button class="generate-btn-inline" onclick="generateLottoNumbers()">
+            <button class="simulate-btn" onclick="simulateLottoNumbers()">
                 Generate Numbers
             </button>
-        </div>
-
-        <div class="ad-container" aria-label="Advertisement">
-            <div class="ad-label">Advertisement</div>
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-2497920379756999"
-                 data-ad-slot="1234567890"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-            <script>
-                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-
-        <div class="input-section hidden" id="inputSection">
-            <div class="input-group">
-                <label class="input-label">Regular Numbers:</label>
-                <div class="range-input">
-                    <input type="number" id="regularMin" value="1" min="1" max="100">
-                    <span class="range-separator">-</span>
-                    <input type="number" id="regularMax" value="69" min="1" max="100">
-                </div>
-            </div>
-            <div class="input-group">
-                <label class="input-label">Bonus Number:</label>
-                <div class="range-input">
-                    <input type="number" id="bonusMin" value="1" min="1" max="100">
-                    <span class="range-separator">-</span>
-                    <input type="number" id="bonusMax" value="29" min="1" max="100">
-                </div>
-            </div>
         </div>
 
         <div id="lottoContainer">
             <div class="empty-state">Your numbers will appear here</div>
         </div>
 
-        <div class="info">
-            <strong>How it works:</strong> Select Powerball or Mega Millions for preset configurations, or choose "Custom" to set your own ranges. The generator creates 5 sets of numbers, each sorted in ascending order. For Powerball and Mega Millions, each set is compared against all past jackpot draws to find the closest historical match — matched numbers are highlighted.
+        <div style="margin-top:30px; text-align:center;">
+            <a href="index.html" class="generate-btn-inline" style="text-decoration:none; display:inline-block;">&larr; Back to Generator</a>
         </div>
         </section>
         </main>
@@ -127,7 +87,6 @@
             document.documentElement.setAttribute('data-theme', savedTheme);
             updateThemeToggle(savedTheme);
         }
-
         function toggleTheme() {
             const currentTheme = document.documentElement.getAttribute('data-theme');
             const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
@@ -135,110 +94,36 @@
             localStorage.setItem('theme', newTheme);
             updateThemeToggle(newTheme);
         }
-
         function updateThemeToggle(theme) {
             const slider = document.querySelector('.theme-toggle-slider');
-            if (slider) {
-                slider.textContent = theme === 'dark' ? '\u2600\uFE0F' : '\uD83C\uDF19';
-            }
+            if (slider) slider.textContent = theme === 'dark' ? '\u2600\uFE0F' : '\uD83C\uDF19';
         }
-
         initTheme();
 
         const lottoConfigs = {
-            powerball: {
-                regularMin: 1,
-                regularMax: 69,
-                bonusMin: 1,
-                bonusMax: 26,
-                regularCount: 5,
-                bonusName: 'Powerball'
-            },
-            megamillions: {
-                regularMin: 1,
-                regularMax: 70,
-                bonusMin: 1,
-                bonusMax: 25,
-                regularCount: 5,
-                bonusName: 'Mega Ball'
-            },
-            custom: {
-                regularMin: 1,
-                regularMax: 69,
-                bonusMin: 1,
-                bonusMax: 29,
-                regularCount: 5,
-                bonusName: 'Bonus'
-            }
+            powerball: { regularMin: 1, regularMax: 69, bonusMin: 1, bonusMax: 26, regularCount: 5, bonusName: 'Powerball' },
+            megamillions: { regularMin: 1, regularMax: 70, bonusMin: 1, bonusMax: 25, regularCount: 5, bonusName: 'Mega Ball' }
         };
-
-        function changeLottoType() {
-            const lottoType = document.getElementById('lottoType').value;
-            const config = lottoConfigs[lottoType];
-            const inputSection = document.getElementById('inputSection');
-            const isCustom = lottoType === 'custom';
-
-            const container = document.getElementById('lottoContainer');
-            container.innerHTML = '<div class="empty-state">Your numbers will appear here</div>';
-            container.className = '';
-
-            if (isCustom) {
-                inputSection.classList.remove('hidden');
-            } else {
-                inputSection.classList.add('hidden');
-            }
-
-            document.getElementById('featureBanner').style.display = isCustom ? 'none' : '';
-
-            document.getElementById('regularMin').value = config.regularMin;
-            document.getElementById('regularMax').value = config.regularMax;
-            document.getElementById('bonusMin').value = config.bonusMin;
-            document.getElementById('bonusMax').value = config.bonusMax;
-
-            const bonusLabels = document.querySelectorAll('.input-label');
-            if (bonusLabels.length >= 2) {
-                const bonusLabel = bonusLabels[1];
-                bonusLabel.textContent = isCustom ? 'Bonus Number:' : config.bonusName + ':';
-            }
-        }
-
-        changeLottoType();
 
         function findBestMatch(regularNums, bonusNum, lottoType) {
             if (!window.LOTTO_DB) return null;
             const dbKey = lottoType === 'megamillions' ? 'megamillions' : 'powerball';
             const draws = LOTTO_DB[dbKey];
             if (!draws) return null;
-
-            let bestMatch = null;
-            let bestScore = -1;
-
+            let bestMatch = null, bestScore = -1;
             for (const draw of draws) {
                 let regularMatches = 0;
                 const matchedNums = new Set();
                 for (const num of regularNums) {
-                    if (draw.n.includes(num)) {
-                        regularMatches++;
-                        matchedNums.add(num);
-                    }
+                    if (draw.n.includes(num)) { regularMatches++; matchedNums.add(num); }
                 }
                 const bonusMatch = bonusNum === draw.b;
                 const score = regularMatches * 2 + (bonusMatch ? 1 : 0);
-
                 if (score > bestScore) {
                     bestScore = score;
-                    bestMatch = {
-                        date: draw.d,
-                        numbers: [...draw.n],
-                        bonus: draw.b,
-                        regularMatches,
-                        bonusMatch,
-                        matchedNums,
-                        multiplier: draw.m
-                    };
+                    bestMatch = { date: draw.d, numbers: [...draw.n], bonus: draw.b, regularMatches, bonusMatch, matchedNums, multiplier: draw.m };
                 }
             }
-
             return bestMatch;
         }
 
@@ -247,171 +132,112 @@
             return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
         }
 
-        function generateLottoNumbers() {
+        function simulateLottoNumbers() {
             const lottoType = document.getElementById('lottoType').value;
+            if (!window.LOTTO_DB) return;
             const config = lottoConfigs[lottoType];
-            const min = parseInt(document.getElementById('regularMin').value) || config.regularMin;
-            const max = parseInt(document.getElementById('regularMax').value) || config.regularMax;
-            const powerballMin = parseInt(document.getElementById('bonusMin').value) || config.bonusMin;
-            const powerballMax = parseInt(document.getElementById('bonusMax').value) || config.bonusMax;
-            const regularCount = config.regularCount;
-            const setsCount = 5;
+            const dbKey = lottoType === 'megamillions' ? 'megamillions' : 'powerball';
+            const draws = LOTTO_DB[dbKey];
             const bonusName = config.bonusName;
-
-            if (min >= max) {
-                alert('Regular number minimum must be less than maximum!');
-                return;
-            }
-            if (powerballMin >= powerballMax) {
-                alert('Bonus number minimum must be less than maximum!');
-                return;
-            }
-            if (max - min + 1 < regularCount) {
-                alert(`Regular number range must be at least ${regularCount} numbers!`);
-                return;
-            }
-
+            const jackpotDraw = draws[Math.floor(Math.random() * draws.length)];
+            const rigged = Math.floor(Math.random() * 5);
             const allSets = [];
-            for (let setIndex = 0; setIndex < setsCount; setIndex++) {
-                const numbers = [];
-                while (numbers.length < regularCount) {
-                    const num = Math.floor(Math.random() * (max - min + 1)) + min;
-                    if (!numbers.includes(num)) {
-                        numbers.push(num);
+            for (let i = 0; i < 5; i++) {
+                if (i === rigged) {
+                    allSets.push({ regular: [...jackpotDraw.n], powerball: jackpotDraw.b });
+                } else {
+                    const numbers = [];
+                    while (numbers.length < config.regularCount) {
+                        const num = Math.floor(Math.random() * (config.regularMax - config.regularMin + 1)) + config.regularMin;
+                        if (!numbers.includes(num)) numbers.push(num);
                     }
+                    numbers.sort((a, b) => a - b);
+                    const bonus = Math.floor(Math.random() * (config.bonusMax - config.bonusMin + 1)) + config.bonusMin;
+                    allSets.push({ regular: numbers, powerball: bonus });
                 }
-                numbers.sort((a, b) => a - b);
-                const powerball = Math.floor(Math.random() * (powerballMax - powerballMin + 1)) + powerballMin;
-                allSets.push({ regular: numbers, powerball: powerball });
             }
-
             const matches = [];
-            if (lottoType !== 'custom' && window.LOTTO_DB) {
-                for (const set of allSets) {
-                    matches.push(findBestMatch(set.regular, set.powerball, lottoType));
-                }
+            for (const set of allSets) {
+                matches.push(findBestMatch(set.regular, set.powerball, lottoType));
             }
-
             displayAllSets(allSets, bonusName, matches);
         }
 
-        function displayAllSets(allSets, bonusName = 'Bonus', matches = []) {
+        function displayAllSets(allSets, bonusName, matches) {
             const container = document.getElementById('lottoContainer');
             container.innerHTML = '';
             container.className = 'lotto-sets';
-
-            allSets.forEach((set, setIndex) => {
+            allSets.forEach(function(set, setIndex) {
                 const setDiv = document.createElement('div');
                 setDiv.className = 'lotto-set';
-
                 const label = document.createElement('div');
                 label.className = 'set-label';
-                label.textContent = `Set ${setIndex + 1}`;
+                label.textContent = 'Set ' + (setIndex + 1);
                 setDiv.appendChild(label);
-
                 const numbersDiv = document.createElement('div');
                 numbersDiv.className = 'lotto-numbers';
-
-                set.regular.forEach((num, numIndex) => {
+                set.regular.forEach(function(num, numIndex) {
                     const ball = document.createElement('div');
                     ball.className = 'number-ball';
                     ball.textContent = num;
-                    ball.style.animationDelay = `${(setIndex * 0.3) + (numIndex * 0.1)}s`;
+                    ball.style.animationDelay = (setIndex * 0.3 + numIndex * 0.1) + 's';
                     numbersDiv.appendChild(ball);
                 });
-
                 const separator = document.createElement('div');
                 separator.className = 'powerball-separator';
                 separator.textContent = '+';
-                separator.style.animationDelay = `${(setIndex * 0.3) + (set.regular.length * 0.1)}s`;
+                separator.style.animationDelay = (setIndex * 0.3 + set.regular.length * 0.1) + 's';
                 numbersDiv.appendChild(separator);
-
                 const powerball = document.createElement('div');
                 powerball.className = 'number-ball powerball';
                 powerball.textContent = set.powerball;
                 powerball.setAttribute('data-bonus-name', bonusName);
-                powerball.style.animationDelay = `${(setIndex * 0.3) + ((set.regular.length + 1) * 0.1)}s`;
+                powerball.style.animationDelay = (setIndex * 0.3 + (set.regular.length + 1) * 0.1) + 's';
                 numbersDiv.appendChild(powerball);
-
                 setDiv.appendChild(numbersDiv);
-
                 const match = matches[setIndex];
                 if (match && match.regularMatches === 5 && match.bonusMatch) {
                     setDiv.appendChild(buildMatchInfo(match, bonusName));
                 }
-
                 container.appendChild(setDiv);
             });
         }
 
         function buildMatchInfo(match, bonusName) {
-            const isJackpot = match.regularMatches === 5 && match.bonusMatch;
-            const isFiveMatch = match.regularMatches === 5;
-            const isHigh = match.regularMatches >= 4;
-
             const div = document.createElement('div');
-            div.className = 'match-info';
-            if (isJackpot) div.classList.add('match-jackpot');
-            else if (isHigh) div.classList.add('match-high');
-
+            div.className = 'match-info match-jackpot';
             const header = document.createElement('div');
             header.className = 'match-info-header';
-
-            let summaryText = `${match.regularMatches}/5`;
-            if (match.bonusMatch) summaryText += ` + ${bonusName}`;
-            summaryText += ' matched';
-
-            if (isJackpot) {
-                const badge = document.createElement('span');
-                badge.className = 'match-badge jackpot';
-                badge.textContent = 'JACKPOT MATCH!';
-                header.appendChild(badge);
-            } else if (isFiveMatch) {
-                const badge = document.createElement('span');
-                badge.className = 'match-badge high';
-                badge.textContent = '5 NUMBER MATCH!';
-                header.appendChild(badge);
-            }
-
+            const badge = document.createElement('span');
+            badge.className = 'match-badge jackpot';
+            badge.textContent = 'JACKPOT MATCH!';
+            header.appendChild(badge);
             const summary = document.createElement('span');
-            summary.textContent = summaryText;
+            summary.textContent = '5/5 + ' + bonusName + ' matched';
             header.appendChild(summary);
-
             const dateSpan = document.createElement('span');
             dateSpan.className = 'match-date';
             dateSpan.textContent = '\u2014 ' + formatMatchDate(match.date);
             header.appendChild(dateSpan);
-
             div.appendChild(header);
-
             const numsDiv = document.createElement('div');
             numsDiv.className = 'match-numbers';
-
             for (const n of match.numbers) {
                 const numEl = document.createElement('span');
-                numEl.className = 'match-num';
-                if (match.matchedNums.has(n)) numEl.classList.add('matched');
+                numEl.className = 'match-num matched';
                 numEl.textContent = n;
                 numsDiv.appendChild(numEl);
             }
-
             const plus = document.createElement('span');
             plus.className = 'match-plus';
             plus.textContent = '+';
             numsDiv.appendChild(plus);
-
             const bonusEl = document.createElement('span');
-            bonusEl.className = 'match-num bonus-ball';
-            if (match.bonusMatch) bonusEl.classList.add('matched');
+            bonusEl.className = 'match-num bonus-ball matched';
             bonusEl.textContent = match.bonus;
             numsDiv.appendChild(bonusEl);
-
             div.appendChild(numsDiv);
             return div;
-        }
-
-        if (!window.LOTTO_DB) {
-            document.getElementById('dbStatus').style.display = 'block';
         }
     </script>
 </body>
