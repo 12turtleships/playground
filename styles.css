@@ -729,35 +729,7 @@ h1 {
 
 .share-icon svg {
     flex-shrink: 0;
-}
-
-.share-x {
-    background: #000;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.25);
-}
-.share-fb {
-    background: #1877f2;
-    box-shadow: 0 3px 10px rgba(24,119,242,0.35);
-}
-.share-reddit {
-    background: #ff4500;
-    box-shadow: 0 3px 10px rgba(255,69,0,0.35);
-}
-.share-wa {
-    background: #25d366;
-    box-shadow: 0 3px 10px rgba(37,211,102,0.35);
-}
-
-.share-icon:hover.share-x  { box-shadow: 0 5px 16px rgba(0,0,0,0.35); }
-.share-icon:hover.share-fb  { box-shadow: 0 5px 16px rgba(24,119,242,0.5); }
-.share-icon:hover.share-reddit { box-shadow: 0 5px 16px rgba(255,69,0,0.5); }
-.share-icon:hover.share-wa { box-shadow: 0 5px 16px rgba(37,211,102,0.5); }
-
-[data-theme="dark"] .share-x {
-    background: #e7e9ea;
-}
-[data-theme="dark"] .share-x svg {
-    fill: #000;
+    display: block;
 }
 
 /* ── Attempt counter ──────────────────────────────────── */
